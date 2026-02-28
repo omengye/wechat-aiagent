@@ -1,0 +1,28 @@
+# 配置文件（包含敏感信息）
+config.yaml
+.env
+
+# IDE 相关
+.idea/
+.vscode/
+.claude/
+
+# 二进制文件
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+nul
+*.zip
+dist/
+
+# 测试相关
+*.test
+*.out
+
+# Go 相关
+vendor/
+go.work
+
+node_modules/

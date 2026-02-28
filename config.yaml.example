@@ -1,0 +1,67 @@
+wechat:
+  appId: your_app_id_here
+  appSecret: your_app_secret_here
+  token: your_wechat_token_here
+  # 生成登录二维码
+  qrcode:
+  -  projectId: your_project_id_here
+     projectName: agent-0x0
+     # 携带字符串
+     tmpStr: "测试一下"
+     # OAuth 客户端配置（可选，用于第三方应用接入）
+     oauthClients:
+       - clientId: app_example_client_id      # 客户端ID（必填）
+         clientSecret: your_client_secret_here # 客户端密钥（必填，明文，系统启动时会自动加密）
+         name: "第三方应用名称"                   # 应用名称（必填）
+         description: "应用描述信息"              # 应用描述（可选）
+         redirectUrls:                          # 回调地址白名单（必填，至少一个）
+           - "https://example.com/oauth/callback"
+           - "https://app.example.com/auth/callback"
+         allowedScopes:                         # 允许的权限列表（必填，至少一个）
+           - "user:read"          # 读取用户基本信息
+           - "user:email"         # 读取用户邮箱
+           - "user:role"          # 读取用户角色
+           - "offline_access"     # 长期访问（获取 refresh token）
+           # - "message:send"     # 发送模板消息（需要 admin 角色）
+           # - "admin:user:read"  # 读取其他用户信息（需要 admin 角色）
+         rateLimit: 1000          # 每小时请求限制（可选，默认1000）
+  # 登录二维码过期时间(秒)
+  qrcodeExpire: 300
+  # 临时二维码默认过期时间(秒)，当未指定过期时间时使用
+  qrcodeDefaultExpire: 1800
+  # 模板消息ID
+  templateId: your_template_id_here
+  # 超级管理员openid（拥有所有权限）
+  superAdmin: your_super_admin_openid_here
+
+jwt:
+  secret: your_jwt_secret_here
+  expire: 1440
+  refreshExpire: 10080
+
+redis:
+  addr: 127.0.0.1:6379
+  password:
+
+server:
+  # 服务器监听端口
+  port: :8443
+  # WebSocket允许的来源白名单，生产环境中应配置实际的域名
+  allowedOrigins:
+    - "http://localhost:5173"
+  # - "https://yourdomain.com"
+  # - "https://www.yourdomain.com"
+  # CORS跨域白名单，用于HTTP接口
+  corsOrigins:
+    - "http://localhost:5173"
+    - "http://127.0.0.1:5173"
+    - "http://localhost:3000"
+  # - "https://yourdomain.com"
+  # WebSocket消息最大大小(字节)
+  maxMessageSize: 4096
+  # ProjectID最大长度
+  maxProjectIdLen: 64
+  # 速率限制：每个IP每秒请求数
+  rateLimitRate: 5
+  # 速率限制：突发请求数
+  rateLimitBurst: 10
